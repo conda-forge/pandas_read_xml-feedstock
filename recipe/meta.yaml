@@ -12,16 +12,16 @@ source:
   sha256: 671267f6f83129d2a998cb7cac5bcb61ae13eb672373be4336da2e96940ed8b6
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     # - distlib
     - pandas
     # - pyarrow
@@ -31,6 +31,8 @@ requirements:
     # - zipfile36
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - pandas_read_xml
   # There are many unused dependencies declared in setup.py
